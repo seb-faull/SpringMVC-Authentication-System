@@ -2,10 +2,10 @@ package com.inktiveAuthenticate.login.controller;
 
 import javax.validation.Valid;
 
-import com.inktiveAuthenticate.login.model.User;
 import com.inktiveAuthenticate.login.model.Artist;
+import com.inktiveAuthenticate.login.model.User;
+import com.inktiveAuthenticate.login.repository.ArtistRepository;
 import com.inktiveAuthenticate.login.service.UserService;
-import com.inktiveAuthenticate.login.service.ArtistService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class LoginController {
 
@@ -24,7 +26,7 @@ public class LoginController {
     private UserService userService;
 
     @Autowired
-    private ArtistService artistService;
+    private ArtistRepository artistRepository;
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
@@ -79,13 +81,15 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+        List<Artist> findAllArtists = artistRepository.findAll();
 
         modelAndView.addObject("userName",
                 "Welcome " + user.getFirstName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+
+        modelAndView.addObject("artists", findAllArtists);
+
         modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
 
-        // Artist artist = (Artist) artistService.findAllArtists();
-        modelAndView.addObject("artists", artistService.findAllArtists());
         modelAndView.setViewName("admin/home");
 
         return modelAndView;

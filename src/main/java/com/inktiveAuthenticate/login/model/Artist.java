@@ -33,6 +33,9 @@ public class Artist {
     @Column(name = "date_of_birth")
     private String dateOfBirth;
 
+    @Column(name = "minimum_charge")
+    private int minimumCharge;
+
     @Column(name = "profile_picture")
     private String profilePicture;
 

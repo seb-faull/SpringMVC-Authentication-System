@@ -28,20 +28,42 @@
                              alt="Beer"/>
                     </div>
 
-                    <section id="find_local_artists">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12 text-center">
-                                    <h2>Find Local Artists</h2>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-1" style="background-color: red;">
-
-                                </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2>Find Local Artists</h2>
                             </div>
                         </div>
-                    </section>
+
+                        <tr th:each="artist : ${artists}">
+                            <div class="row">
+                                <div class="col-sm-1" style="background-color: red;">
+                                    <td th:text="${artist.firstName}"></td>
+                                    <td th:text="${artist.lastName}"></td>
+                                    <td th:text="${artist.minimumCharge}"></td>
+                                </div>
+                            </div>
+                        </tr>
+                    </div>
+
+                    <!--<div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2>Find Local Artists</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1" style="background-color: red;">
+                                <p>{{artist.firstName}}</p>
+                                <p>{{artist.lastName}}</p>
+                                <p>{{artist.minimumCharge}}</p>
+                            </div>
+                        </div>
+                    </div>-->
+
+
+
+
 
                     <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
                 </div>

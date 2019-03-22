@@ -10,5 +10,4 @@ import java.util.List;
 public interface ArtistRepository extends JpaRepository<Artist, Long> {
     Artist findByEmail(String email);
     Artist findByUsername(String username);
-    List<Artist> findAll();
 }

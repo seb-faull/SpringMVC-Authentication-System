@@ -26,8 +26,4 @@ public class ArtistService {
         return artistRepository.findByUsername(username);
     }
 
-    public Artist findAllArtists() {
-        return (Artist) artistRepository.findAll();
-    }
-
 }
